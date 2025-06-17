@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Window/Keyboard.hpp>
 #include <vector>
 #include <iostream>
 
@@ -33,16 +34,33 @@ int main()
     {
         while (const std::optional event = window.pollEvent())
         {
+
             if (event->is<sf::Event::Closed>())
                 window.close();
+
+            if (event->is<sf::Event::KeyPressed>())
+            {
+                // Event handling
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+                {
+                    if (simulation.IsRunning())
+                    {
+                        simulation.Stop();
+                    }
+                    else
+                    {
+                        simulation.Start();
+                    }
+                }
+            }
         }
 
+        // Update
         simulation.Update();
 
+        // Draw and show
         window.clear(Grey);
-
         simulation.Draw(window);
-
         window.display();
     }
 
