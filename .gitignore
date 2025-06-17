@@ -1,0 +1,18 @@
+# .gitignore
+# Ignore build artifacts and OS-specific files
+
+# Build
+build/
+*.o
+*.obj
+*.out
+*.exe
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
