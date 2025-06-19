@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window/Keyboard.hpp>
+#include <SFML/Window/Mouse.hpp>
 #include <vector>
 #include <iostream>
 
@@ -38,9 +39,10 @@ int main()
             if (event->is<sf::Event::Closed>())
                 window.close();
 
+            // Event handling Keyboard, Mouse
             if (event->is<sf::Event::KeyPressed>())
             {
-                // Event handling
+
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
                 {
                     if (simulation.IsRunning())
@@ -51,6 +53,15 @@ int main()
                     {
                         simulation.Start();
                     }
+                }
+            }
+
+            if (event->is<sf::Event::MouseButtonPressed>())
+            {
+                if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+                {
+                    auto postition = sf::Mouse::getPosition(window);
+                    simulation.SetCellValue((postition.y / CELL_SIZE), (postition.x / CELL_SIZE), 1);
                 }
             }
         }

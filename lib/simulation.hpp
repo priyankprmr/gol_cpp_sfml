@@ -12,7 +12,7 @@ private:
 public:
     Simulation(int height, int width, int cellSize, int padding = 0)
         : grid(height, width, cellSize, padding),
-          tempGrid(height, width, cellSize, padding), run(false) { grid.FillRandom(); }
+          tempGrid(height, width, cellSize, padding), run(false) { }
 
     void Draw(sf::RenderWindow &window);
 
