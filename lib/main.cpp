@@ -20,10 +20,10 @@ int main()
     const sf::Color Grey(29, 29, 29, 255);
 
     const int WINDOW_HEIGHT = 600;
-    const int WINDOW_WIDTH = 800;
+    const int WINDOW_WIDTH = 600;
     const int FPS = 12;
 
-    const int CELL_SIZE = 10;
+    const int CELL_SIZE = 5;
     const int CELL_PADDING = 1;
 
     sf::RenderWindow window(sf::VideoMode({WINDOW_WIDTH, WINDOW_HEIGHT}), "Game Of Life");
@@ -56,12 +56,15 @@ int main()
                 }
             }
 
-            if (event->is<sf::Event::MouseButtonPressed>())
+            if (!simulation.IsRunning())
             {
-                if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+                if (event->is<sf::Event::MouseButtonPressed>())
                 {
-                    auto postition = sf::Mouse::getPosition(window);
-                    simulation.SetCellValue((postition.y / CELL_SIZE), (postition.x / CELL_SIZE), 1);
+                    if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+                    {
+                        auto postition = sf::Mouse::getPosition(window);
+                        simulation.SetCellValue((postition.y / CELL_SIZE), (postition.x / CELL_SIZE), 1);
+                    }
                 }
             }
         }
